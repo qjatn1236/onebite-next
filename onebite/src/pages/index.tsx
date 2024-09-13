@@ -27,16 +27,20 @@ export default function Home() {
 
       <section>
         <h3>지금 추천하는 영화</h3>
-        {movies.map((movie) => (
-          <MovieItem key={movie.id} {...movie} />
-        ))}
+        <div className={style.recoConatiner}>
+          {movies.slice(0, 3).map((movie) => (
+            <MovieItem key={movie.id} {...movie} />
+          ))}
+        </div>
       </section>
 
       <section>
         <h3>등록된 모든 영화</h3>
-        {movies.map((movie) => (
-          <MovieItem key={movie.id} {...movie} />
-        ))}
+        <div className={style.allContainer}>
+          {movies.map((movie) => (
+            <MovieItem key={movie.id} {...movie} />
+          ))}
+        </div>
       </section>
     </div>
   );

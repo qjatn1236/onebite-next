@@ -19,7 +19,7 @@ export default function SearchalbeLayout({ children }: { children: ReactNode }) 
 
   const onSubmit = () => {
     if (!search || q === search) return;
-    router.push(`/movie?q=${search}`);
+    router.push(`/search?q=${search}`);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

@@ -7,3 +7,15 @@
 .container h3 {
   margin-bottom: 0;
 }
+
+.recoConatiner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.allContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+}

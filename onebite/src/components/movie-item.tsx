@@ -6,12 +6,12 @@ export default function MovieItem({ id, title, subTitle, author, coverImgUrl }: 
   return (
     <Link href={`/movie/${id}`} className={style.container}>
       <img src={coverImgUrl} />
-      <div>
+      {/* <div>
         <div className={style.title}>{title}</div>
         <div className={style.subTitle}>{subTitle}</div>
         <br />
         <div className={style.author}>{author}</div>
-      </div>
+      </div> */}
     </Link>
   );
 }
