@@ -8,6 +8,7 @@ export default function SearchalbeLayout({ children }: { children: ReactNode }) 
   const [search, setSearch] = useState("");
 
   const q = router.query.q as string;
+
   useEffect(() => {
     setSearch(q || "");
   }, [q]);
@@ -18,7 +19,7 @@ export default function SearchalbeLayout({ children }: { children: ReactNode }) 
 
   const onSubmit = () => {
     if (!search || q === search) return;
-    router.push(`/search?q=${search}`);
+    router.push(`/movie?q=${search}`);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
