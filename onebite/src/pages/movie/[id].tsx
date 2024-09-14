@@ -1,4 +1,6 @@
+import fetchOneMovie from "@/lib/fetch-one-movie";
 import style from "./[id].module.css";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 const mockData = {
   id: 1,
   title: "코코",
@@ -10,17 +12,26 @@ const mockData = {
     "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20171222_56%2F1513906341368blx3Q_JPEG%2Fmovie_image.jpg",
 };
 
-export default function Page() {
-  const { title, subTitle, author, description, coverImgUrl } = mockData;
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const id = context.params!.id;
+  const movie = await fetchOneMovie(Number(id));
+
+  return {
+    props: { movie },
+  };
+};
+
+export default function Page({ movie }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  if (!movie) return "문제가 발생했습니다 다시 시도해주세요";
+  const { id, title, subTitle, description, releaseDate, company, genres, runtime, posterImgUrl } = movie;
 
   return (
     <div className={style.container}>
-      <div className={style.cover_img_container} style={{ backgroundImage: `url('${coverImgUrl}')` }}>
-        <img src={coverImgUrl} />
+      <div className={style.cover_img_container} style={{ backgroundImage: `url('${posterImgUrl}')` }}>
+        <img src={posterImgUrl} />
       </div>
       <div className={style.title}>{title}</div>
       <div className={style.subTitle}>{subTitle}</div>
-      <div className={style.author}>{author}</div>
       <div className={style.description}>{description}</div>
     </div>
   );

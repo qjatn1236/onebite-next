@@ -8,11 +8,14 @@ export interface BookData {
   coverImgUrl: string;
 }
 
-export interface MovieData {
+export interface MoviesData {
   id: number;
   title: string;
   subTitle: string;
-  author: string;
   description: string;
-  coverImgUrl: string;
+  releaseDate: string;
+  company: string;
+  genres: string;
+  runtime: number;
+  posterImgUrl: string;
 }

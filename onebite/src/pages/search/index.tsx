@@ -1,33 +1,25 @@
 import SearchalbeLayout from "@/components/searchable-layout";
 import { ReactNode } from "react";
-import books from "@/mock/books.json";
-import BookItem from "@/components/book-item";
 
-import movies from "@/mock/movies.json";
 import MovieItem from "@/components/movie-item";
-import { useRouter } from "next/router";
-import { MovieData } from "@/types";
+import fetchMoive from "@/lib/fetch-movie";
+import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 
-const getFilterMovie = (movies: MovieData[], query: string) => {
-  return movies.filter((movie) => movie.title.includes(query));
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const q = context.query.q;
+  const movies = await fetchMoive(q as string);
+
+  return {
+    props: { movies },
+  };
 };
 
-export default function Page() {
-  const router = useRouter();
-  const q = router.query.q as string;
-
-  const getFilterResult = getFilterMovie(movies, q);
-  console.log(getFilterResult);
-
+export default function Page({ movies }: InferGetServerSidePropsType<GetServerSideProps>) {
   return (
     <div>
-      {getFilterResult.map((movie) => (
+      {movies.map((movie) => (
         <MovieItem key={movie.id} {...movie} />
       ))}
-
-      {/* {books.map((book) => (
-        <BookItem key={book.id} {...book} />
-      ))} */}
     </div>
   );
 }
